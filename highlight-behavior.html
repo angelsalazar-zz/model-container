@@ -1,0 +1,60 @@
+<script>
+    HighlightBehavior = {
+      properties: {
+          hover:{
+            type:Boolean,
+            value: false,
+            reflectToAttribute:true,
+            notify:true
+          }
+      },
+      listeners: {
+        mouseenter: '_addHightlight',
+        mouseleave: '_removeHighlight'
+      },
+      _addHightlight:function(){
+        var _boxesWrapper = Polymer.dom(this).parentNode;
+        var _content = Polymer.dom(_boxesWrapper).parentNode;
+        var _paperHpMain = Polymer.dom(_content).parentNode;
+        var _paperDrawerPanel = Polymer.dom(_paperHpMain).parentNode;
+        var _sliders = _paperDrawerPanel.querySelectorAll("slider-parent");
+        for(var i=0;i<_sliders.length;i++){
+          _sliders[i].querySelector("slider-switch[uid='"+this.model.uid+"']").set('hover',true);
+        }
+        this.hover = true;
+      },
+      _removeHighlight:function(){
+        var _boxesWrapper = Polymer.dom(this).parentNode;
+        var _content = Polymer.dom(_boxesWrapper).parentNode;
+        var _paperHpMain = Polymer.dom(_content).parentNode;
+        var _paperDrawerPanel = Polymer.dom(_paperHpMain).parentNode;
+        var _sliders = _paperDrawerPanel.querySelectorAll("slider-parent");
+        for(var i=0;i<_sliders.length;i++){
+          _sliders[i].querySelector("slider-switch[uid='"+this.model.uid+"']").set('hover',false);
+        }
+        this.hover = false;
+      }
+
+      // _handleSelected:function(e){
+      //     if(this.isSelected){
+      //         if(e.ctrlKey){
+      //             this.isSelected = false;
+      //             this.visibility = "none";
+      //         }
+      //     }else{
+      //         if(!e.ctrlKey){
+      //             var _children = Polymer.dom(Polymer.dom(this).parentNode).querySelectorAll("simple-el");
+      //             for (var i = 0; i < _children.length; i++) {
+      //                     if( _children[i].isSelected === true){
+      //                         _children[i].isSelected = false;
+      //                     }
+      //
+      //             }
+      //         }
+      //         this.isSelected = true;
+      //         this.visibility = "block";
+      //     }
+      // },
+
+    };
+</script>
